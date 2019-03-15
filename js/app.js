@@ -5,7 +5,7 @@
  * use of. It also uses the Handlebars templating library and
  * jQuery.
  */
-
+console.log('appjs');
 // The names and URLs to all of the feeds we'd like available.
 var allFeeds = [
     {
@@ -28,6 +28,7 @@ var allFeeds = [
  * function when the API is loaded.
  */
 function init() {
+    console.log('init');
     // Load the first feed we've defined (index of 0).
     loadFeed(0);
 }
@@ -41,6 +42,7 @@ function init() {
  * which will be called after everything has run successfully.
  */
  function loadFeed(id, cb) {
+     console.log('loadFeed');
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
@@ -50,7 +52,7 @@ function init() {
        data: JSON.stringify({url: feedUrl}),
        contentType:"application/json",
        success: function (result, status){
-
+        console.log('success dentro do ajax');
                  var container = $('.feed'),
                      title = $('.header-title'),
                      entries = result.feed.entries,
@@ -74,6 +76,7 @@ function init() {
                  }
                },
        error: function (result, status, err){
+        console.log('error');
                  //run only the callback without attempting to parse result due to error
                  if (cb) {
                      cb();
@@ -93,6 +96,7 @@ google.setOnLoadCallback(init);
  * until the DOM is ready.
  */
 $(function() {
+    console.log('funcionfeed');
     var container = $('.feed'),
         feedList = $('.feed-list'),
         feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
@@ -117,6 +121,7 @@ $(function() {
      * (following the link) from occurring.
      */
     feedList.on('click', 'a', function() {
+        console.log('feedlist');
         var item = $(this);
 
         $('body').addClass('menu-hidden');
@@ -128,6 +133,7 @@ $(function() {
      * on the body to perform the hiding/showing of our menu.
      */
     menuIcon.on('click', function() {
+        console.log('menuIcon');
         $('body').toggleClass('menu-hidden');
     });
 }());
